@@ -25,7 +25,7 @@ class Game:
         self.commands["help"] = help
         quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
         self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
+        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
         self.commands["go"] = go
         
         # Setup rooms
@@ -42,15 +42,21 @@ class Game:
         self.rooms.append(swamp)
         castle = Room("Castle", "dans un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
         self.rooms.append(castle)
+        basement = Room("Basement", "dans une cave abandonnée, cela semble être un cul de sac.")
+        self.rooms.append(basement)
+        attic = Room("attic", "dans le grenier du petit chalet, rien d'important ici.")
+        self.rooms.append(attic)
 
         # Create exits for rooms
 
-        forest.exits = {"N" : cave, "E" : tower, "S" : castle, "O" : None}
-        tower.exits = {"N" : cottage, "E" : None, "S" : swamp, "O" : forest}
-        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
-        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
-        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
-        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
+        forest.exits = {"N" : cave, "E" : tower, "S" : castle, "O" : None, "U" : None, "D" : None}
+        tower.exits = {"N" : cottage, "E" : None, "S" : swamp, "O" : forest, "U" : None, "D" : None}
+        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None , "U" : None, "D" : None }
+        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave, "U" : attic ,  "D" : None}
+        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle,  "U" : None,  "D" : None}
+        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None, "D" : basement}
+        basement.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : castle,  "D" : None}
+        attic.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : cottage }
 
         # Setup player and starting room
 
