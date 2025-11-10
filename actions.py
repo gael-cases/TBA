@@ -155,3 +155,10 @@ class Actions:
         print(game.player.current_room.get_long_description())
         print(game.player.get_history())
         return True
+
+    def inventory(game, list_of_words, number_of_parameters):
+        txt = game.player.get_inventory()
+        print(txt if txt else "\nVotre inventaire est vide.\n")
+        return False
+
+        

@@ -6,6 +6,7 @@ from room import Room
 from player import Player
 from command import Command
 from actions import Actions
+from item import Item
 
 class Game:
 
@@ -29,6 +30,7 @@ class Game:
         self.commands["go"] = go
         self.commands["history"] = Command("history", " : afficher l'historique des pièces visitées", Actions.history, 0)
         self.commands["back"]    = Command("back", " : revenir à la pièce précédente", Actions.back, 0)
+        self.commands["inventory"] = Command("inventory", " : afficher l'inventaire", Actions.inventory, 0)
         
         # Setup rooms
 
@@ -49,6 +51,11 @@ class Game:
         attic = Room("attic", "dans le grenier du petit chalet, rien d'important ici.")
         self.rooms.append(attic)
 
+        # items
+        sword = Item("épée", "une épée au fil tranchant comme un rasoir", 2)
+        case = Item("case", "une épée au fil tranchant comme un rasoir", 2)
+
+
         # Create exits for rooms
 
         forest.exits = {"N" : cave, "E" : tower, "S" : castle, "O" : None, "U" : None, "D" : None}
@@ -64,6 +71,7 @@ class Game:
 
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = swamp
+        self.player.inventory = {sword, case}
 
     # Play the game
     def play(self):
