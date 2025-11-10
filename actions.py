@@ -137,3 +137,21 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+
+    def history(game, list_of_words, number_of_parameters):
+        txt = game.player.get_history()
+        print(txt if txt else "\nAucun déplacement enregistré pour l'instant.\n")
+        return False  # ne termine pas le tour
+
+       
+
+    def back(game, list_of_words, number_of_parameters):
+        if not game.player.history:
+            print("\nImpossible de revenir en arrière (aucun déplacement précédent).\n")
+            return False
+
+        prev_room = game.player.history.pop()
+        game.player.current_room = prev_room
+        print(game.player.current_room.get_long_description())
+        print(game.player.get_history())
+        return True
