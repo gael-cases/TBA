@@ -7,6 +7,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
+from character import Character
 
 class Game:
 
@@ -71,6 +72,14 @@ class Game:
         castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None, "D" : basement}
         basement.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : castle,  "D" : None}
         attic.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : cottage }
+
+
+        # characters
+        gandalf = Character("Gandalf", "un magicien blanc", forest, ["Abracadabra !"])
+
+        # Setup character
+        forest.characters = {gandalf}
+        
 
         # Setup player and starting room
 

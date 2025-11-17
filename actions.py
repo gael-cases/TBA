@@ -163,6 +163,10 @@ class Actions:
 
     def look(game, list_of_words, number_of_parameters):
         print(game.player.current_room.get_inventory())
+        if game.player.current_room.characters:
+            print("Ici se trouve :\n")
+            for char in game.player.current_room.characters:
+                print(f"    - {char}\n")
         return False
 
     def take(game, list_of_words, number_of_parameters):
@@ -173,13 +177,24 @@ class Actions:
             print(MSG1.format(command_word=command_word))
             return False
         
+        inventory_weight = 0
+        for item in game.player.inventory:
+            inventory_weight = inventory_weight + item.weight
+
+
         item_name = list_of_words[1]
         for item in game.player.current_room.inventory:
             if item.name == item_name:
-                game.player.inventory.add(item)
-                game.player.current_room.inventory.remove(item)
-                print("\nVous avez ramassé " + item.name + ".\n")
-                return
+                if (inventory_weight + item.weight) < game.player.max_weight:
+                    game.player.inventory.add(item)
+                    game.player.current_room.inventory.remove(item)
+                    print("\nVous avez ramassé " + item.name + ".\n")
+                    return
+                else:
+                    print("\nVous allez être trop lourd, vous ne pouvez pas ramasser cet objet.\nVotre poids : " + str(inventory_weight) + ". Votre poids maximum : " + str(game.player.max_weight) + ".\n")
+                    return
+        print("\nIl n'y a pas cet objet ici.\n")
+        return
 
     def drop(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
