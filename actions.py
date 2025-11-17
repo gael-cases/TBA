@@ -156,9 +156,43 @@ class Actions:
         print(game.player.get_history())
         return True
 
-    def inventory(game, list_of_words, number_of_parameters):
+    def check(game, list_of_words, number_of_parameters):
         txt = game.player.get_inventory()
         print(txt if txt else "\nVotre inventaire est vide.\n")
         return False
 
+    def look(game, list_of_words, number_of_parameters):
+        print(game.player.current_room.get_inventory())
+        return False
+
+    def take(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
         
+        item_name = list_of_words[1]
+        for item in game.player.current_room.inventory:
+            if item.name == item_name:
+                game.player.inventory.add(item)
+                game.player.current_room.inventory.remove(item)
+                print("\nVous avez ramassé " + item.name + ".\n")
+                return
+
+    def drop(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        
+        item_name = list_of_words[1]
+        for item in game.player.inventory:
+            if item.name == item_name:
+                game.player.inventory.remove(item)
+                game.player.current_room.inventory.add(item)
+                print("\nVous avez déposé " + item.name + ".\n")
+                return

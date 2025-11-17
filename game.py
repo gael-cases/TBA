@@ -30,7 +30,10 @@ class Game:
         self.commands["go"] = go
         self.commands["history"] = Command("history", " : afficher l'historique des pièces visitées", Actions.history, 0)
         self.commands["back"]    = Command("back", " : revenir à la pièce précédente", Actions.back, 0)
-        self.commands["inventory"] = Command("inventory", " : afficher l'inventaire", Actions.inventory, 0)
+        self.commands["check"] = Command("check", " : afficher l'inventaire", Actions.check, 0)
+        self.commands["look"] = Command("look", " : affiche les items dans la room", Actions.look, 0)
+        self.commands["take"] = Command("take", " : ramasse un objet dans la salle", Actions.take, 1)
+        self.commands["drop"] = Command("drop", " : dépose un objet dans la salle", Actions.drop, 1)
         
         # Setup rooms
 
@@ -53,8 +56,10 @@ class Game:
 
         # items
         sword = Item("épée", "une épée au fil tranchant comme un rasoir", 2)
-        case = Item("case", "une épée au fil tranchant comme un rasoir", 2)
 
+        # setup item
+
+        cave.inventory = {sword}
 
         # Create exits for rooms
 
@@ -71,7 +76,6 @@ class Game:
 
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = swamp
-        self.player.inventory = {sword, case}
 
     # Play the game
     def play(self):
