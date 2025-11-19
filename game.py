@@ -100,7 +100,7 @@ class Game:
     def process_command(self, command_string) -> None:
 
         # Split the command string into a list of words
-        list_of_words = command_string.split(" ")
+        list_of_words = command_string.split()
 
         command_word = list_of_words[0]
 

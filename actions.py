@@ -50,7 +50,7 @@ class Actions:
         # If the number of parameters is incorrect, print an error message and return False.
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
-            print(MSG1.format(command_word=command_word))
+            print("\nTu vas où ?\n")
             return False
 
         # Get the direction from the list of words.
@@ -200,8 +200,7 @@ class Actions:
         l = len(list_of_words)
         # If the number of parameters is incorrect, print an error message and return False.
         if l != number_of_parameters + 1:
-            command_word = list_of_words[0]
-            print(MSG1.format(command_word=command_word))
+            print("\ndrop quoi ?\n")
             return False
         
         item_name = list_of_words[1]
@@ -211,3 +210,6 @@ class Actions:
                 game.player.current_room.inventory.add(item)
                 print("\nVous avez déposé " + item.name + ".\n")
                 return
+        print("\nvous n'avez pas cet objet.\n")
+        return
+                    
