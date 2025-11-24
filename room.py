@@ -7,8 +7,10 @@ class Room:
         self.name = name
         self.description = description
         self.exits = {}
+        # Dictionnaire nom_item -> Item
         self.inventory = {}
-        self.characters ={}
+        # Dictionnaire nom_pnj -> Character
+        self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -30,13 +32,22 @@ class Room:
 
     # Return a long description of this room including exits.
     def get_long_description(self):
+        # description utilisée partout (go, début du jeu, etc.)
         return f"\nVous êtes {self.description}\n\n{self.get_exit_string()}\n"
 
-
     def get_inventory(self):
+        """
+        Retourne une description textuelle des objets présents dans la salle.
+
+        ⚠️ IMPORTANT :
+        - self.inventory est un dict {nom_item: Item}
+        - on boucle donc sur .values() pour récupérer les objets.
+        """
         if not self.inventory:
             return "\nIl n'y a aucun objet ici.\n"
+
         lines = ["La pièce contient :"]
-        for item in self.inventory:
-            lines.append(f"    - {item}")
+        # on parcourt les objets (instances de Item)
+        for item in self.inventory.values():
+            lines.append(f"    - {item.name} : {item.description}")
         return "\n" + "\n".join(lines) + "\n"
