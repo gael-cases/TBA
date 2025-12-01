@@ -2,11 +2,6 @@
 # Gestion de la condition de victoire du jeu
 
 def game_won(game):
-    """
-    Appelée quand la quête finale (q3) est terminée.
-    Affiche un texte de fin et arrête le jeu.
-    """
-
     player = game.player
 
     print("\n" + "=" * 50)
@@ -27,5 +22,4 @@ def game_won(game):
 
     print("Merci d'avoir joué à cette aventure.\n")
 
-    # On arrête la boucle de jeu
     game.finished = True

@@ -183,19 +183,13 @@ class Game:
             5
         )
 
-        # On place les objets dans les inventaires des salles.
-        # On ne remplace PAS inventory, on ajoute des entrées dans le dict existant.
+        
         village.inventory[pierre_purete.name] = pierre_purete
         lisiere_est.inventory[graine_sacree.name] = graine_sacree
         ferme.inventory[fragment_lame.name] = fragment_lame
         sanctuaire.inventory[beamer.name] = beamer
 
-        # -------------------------------------------------
-        # 5) Characters (PNJ)
-        # -------------------------------------------------
-        # ⚠️ Même correction que pour inventory :
-        # on considère Room.characters comme un dictionnaire nom -> Character.
-        # C'est plus pratique pour accéder à un PNJ par son nom dans Actions.talk().
+       
 
         herboriste = Character(
             "herboriste",
@@ -234,24 +228,19 @@ class Game:
         lisiere_ouest.characters[forgeron.name] = forgeron
         sanctuaire.characters[esprit_foret.name] = esprit_foret
 
-        # -------------------------------------------------
-        # 6) Setup player and starting room
-        # -------------------------------------------------
+       
 
         self.player = Player(input("\nEntrez votre nom: "))
 
-        # On commence logiquement dans le village
+        # On commence dans le village
         self.player.current_room = village
 
-         # -------------------------------------------------
-        # -------------------------------------------------
-        # 7) Quêtes : initialisation du QuestManager et 3 quêtes
-        # -------------------------------------------------
+        
         self.quest_manager = QuestManager()
 
-        # =====================
+        # 
         # Quête 1 : Comprendre la Corruption
-        # =====================
+        # 
         #
         # Objectifs :
         #  1) Parler à l'herboriste au village
@@ -262,21 +251,21 @@ class Game:
             "q1_obj1",
             "Parler à l'herboriste au village.",
             trigger_type="talk",
-            trigger_value="herboriste"   # nom en minuscule (Actions.talk)
+            trigger_value="herboriste"  
         )
 
         obj2_q1 = QuestObjective(
             "q1_obj2",
             "Ramasser la pierre de pureté.",
             trigger_type="take",
-            trigger_value="pierre_purete"  # nom exact de l'item
+            trigger_value="pierre_purete"  
         )
 
         obj3_q1 = QuestObjective(
             "q1_obj3",
             "Explorer la Forêt de Brume.",
             trigger_type="go",
-            trigger_value="Forêt de Brume"  # Room.name exact
+            trigger_value="Forêt de Brume" 
         )
 
         quest1 = Quest(
@@ -290,9 +279,9 @@ class Game:
 
         self.quest_manager.add_quest(quest1)
 
-        # =====================
+        # 
         # Quête 2 : Reforger la lame
-        # =====================
+        # 
         #
         # Objectifs :
         #  1) Récupérer le fragment de lame à la ferme
@@ -323,9 +312,9 @@ class Game:
 
         self.quest_manager.add_quest(quest2)
 
-        # =====================
-        # Quête 3 : Purifier le Cœur de la Forêt (quête finale)
-        # =====================
+        # 
+        # Quête 3 : Purifier le Cœur de la Forêt 
+        # 
         #
         # Objectifs :
         #  1) Ramasser la graine sacrée
@@ -375,44 +364,39 @@ class Game:
         self.quest_manager.add_quest(quest3)
 
 
-        # Si ton Player gère un historique (list des rooms déjà visitées),
-        # tu peux éventuellement initialiser ici, par exemple :
-        # self.player.history.append(village)
-        # (à adapter à ton implémentation réelle de Player)
+      
 
-    # Play the game
+    
     def play(self):
         self.setup()
         self.print_welcome()
-        # Loop until the game is finished
+       
         while not self.finished:
-            # Get the command from the player
+            
             self.process_command(input("> "))
         return None
 
-    # Process the command entered by the player
+    
     def process_command(self, command_string) -> None:
 
-        # Split the command string into a list of words
+       
         list_of_words = command_string.split()
 
-        # === PETITE SÉCURITÉ ===
-        # Si le joueur appuie juste sur Entrée sans rien écrire,
-        # list_of_words est vide et list_of_words[0] planterait.
+        
         if not list_of_words:
             return
 
         command_word = list_of_words[0]
 
-        # If the command is not recognized, print an error message
+        
         if command_word not in self.commands.keys():
             print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
-        # If the command is recognized, execute it
+      
         else:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
 
-    # Print the welcome message
+   
     def print_welcome(self):
         print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure à Brumeval !")
         print("La forêt est corrompue... À toi de découvrir ce qui se cache derrière ce mal.")
@@ -421,7 +405,7 @@ class Game:
     
 
 def main():
-    # Create a game object and play the game
+    
     Game().play()
     
 
