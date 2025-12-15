@@ -216,6 +216,8 @@ class Actions:
             except AttributeError:
                 pass
 
+        pnj.move()
+
         return True
 
     def quests(game, list_of_words, number_of_parameters):

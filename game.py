@@ -1,5 +1,4 @@
 # Description: Game class
-
 # Import modules
 
 from room import Room
