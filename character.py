@@ -23,7 +23,7 @@ class Character():
     
     def move(self):
         """
-        À chaque tour :
+        À chaque tour 
         - 1 chance sur 2 de rester sur place
         - sinon, déplacement vers une pièce adjacente au hasard
         Retourne True si déplacement, False sinon
