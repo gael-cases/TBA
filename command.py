@@ -14,7 +14,7 @@ class Command:
         __init__(self, command_word, help_string, action, number_of_parameters) : The constructor.
         __str__(self) : The string representation of the command.
 
-    Examples:
+    Examples: 
 
     >>> from actions import go
     >>> command = Command("go", "Permet de se déplacer dans une direction.", go, 1)

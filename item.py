@@ -7,4 +7,4 @@ class Item():
         self.weight = weight
 
     def __str__(self):
-        return self.name + " : " + self.description + ". Poids : " + str(self.weight) + " kg"
+        return self.name + " : " + self.description + ". Poids : " + str(self.weight) + " kg" 

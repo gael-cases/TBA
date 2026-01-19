@@ -11,7 +11,7 @@ class Player():
 
     def move(self, direction):
         direct = {'N', 'S', 'O', 'E', 'U', 'D'}
-        
+         
         if direction not in direct:
             print("\nDirection inconnue.\n")
             return False

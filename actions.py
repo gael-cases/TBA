@@ -95,7 +95,7 @@ class Actions:
         game.player.current_room = prev_room
         print(game.player.current_room.get_long_description())
         print(game.player.get_history())
-        return True
+        return True 
 
     def check(game, list_of_words, number_of_parameters):
         txt = game.player.get_inventory()

@@ -9,7 +9,7 @@ class Character():
         self.current_room = current_room
         self.msgs = msgs
         self.msg_index = 0
-
+ 
     def __str__(self):
         return self.name + " : " + self.description
 

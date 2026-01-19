@@ -76,7 +76,7 @@ class Quest:
         done = sum(1 for o in self.objectives if o.completed)
         total = len(self.objectives)
         return f"- {self.id} : {self.name} [{status}] ({done}/{total} objectifs)"
-
+ 
     def get_details(self):
         lines = [
             f"Quête {self.id} : {self.name}",

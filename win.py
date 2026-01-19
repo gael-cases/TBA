@@ -19,7 +19,7 @@ def game_won(game):
         "Les habitants pourront revenir au village, les chemins seront à nouveau sûrs, "
         "et les histoires de ton courage seront racontées pendant des générations.\n"
     )
-
+ 
     print("Merci d'avoir joué à cette aventure.\n")
 
     game.finished = True

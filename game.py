@@ -163,7 +163,7 @@ class Game:
             "une petite pierre claire et chaude au toucher, capable de dévoiler la Corruption.",
             1
         )
-
+ 
         graine_sacree = Item(
             "graine_sacree",
             "une graine lumineuse qui semble battre comme un cœur.",

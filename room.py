@@ -15,7 +15,7 @@ class Room:
             return self.exits[direction]
         else:
             return None
-    
+     
     def get_exit_string(self):
         exit_string = "Sorties: " 
         for exit in self.exits.keys():
